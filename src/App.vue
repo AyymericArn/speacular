@@ -4,22 +4,15 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
     </div>
-    <router-view/>
+    <transition name="swipe" mode="out-in">
+      <router-view/>
+    </transition>
   </div>
 </template>
 <style lang="stylus">
-#app
-  font-family 'Avenir', Helvetica, Arial, sans-serif
-  -webkit-font-smoothing antialiased
-  -moz-osx-font-smoothing grayscale
-  text-align center
-  color #2c3e50
+.swipe-enter-active, .swipe-leave-active
+  transition all .2s ease
 
-#nav
-  padding 30px
-  a
-    font-weight bold
-    color #2c3e50
-    &.router-link-exact-active
-      color #42b983
+.swipe-enter, .swipe-leave-to /* .fade-leave-active below version 2.1.8 */
+  opacity 0
 </style>
