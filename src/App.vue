@@ -9,6 +9,7 @@
     </transition>
   </div>
 </template>
+
 <style lang="stylus">
 .swipe-enter-active, .swipe-leave-active
   transition all .2s ease

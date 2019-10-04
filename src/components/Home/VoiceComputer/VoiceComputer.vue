@@ -17,6 +17,9 @@ export default Vue.extend({
             alert('record');
         },
     },
+    mounted() {
+        this.$store.dispatch('loadMediaRecorder')
+    },
 });
 </script>
 
