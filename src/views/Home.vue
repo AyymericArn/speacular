@@ -8,8 +8,8 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import Tutorial from '@/components/Tutorial.vue'; // @ is an alias to /src
-import VoiceComputer from '@/components/VoiceComputer.vue'; // @ is an alias to /src
+import Tutorial from '@/components/Home/Tutorial/Tutorial.vue'; // @ is an alias to /src
+import VoiceComputer from '@/components/Home/VoiceComputer/VoiceComputer.vue'; // @ is an alias to /src
 
 export default Vue.extend({
   name: 'home',

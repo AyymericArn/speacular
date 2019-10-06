@@ -14,11 +14,12 @@ import Vue from 'vue';
 export default Vue.extend({
     methods: {
         record() {
+            this.$store.dispatch('startRecording');
             alert('record');
         },
     },
     mounted() {
-        this.$store.dispatch('loadMediaRecorder')
+        this.$store.dispatch('loadMediaRecorder');
     },
 });
 </script>
