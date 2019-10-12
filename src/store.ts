@@ -7,21 +7,24 @@ declare var MediaRecorder: any;
 
 Vue.use(Vuex);
 
+// const createMediaRecorder = async (): Promise<any> => {
+//   const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+//   return new MediaRecorder(stream);
+// };
+
 export default new Vuex.Store({
   state: {
-    // mocking the MediaRecorder to please TS
-    mediaRecorder: new MediaRecorder(),
+    // // mocking the MediaRecorder to please TS
+    mediaRecorder: null as any,
     audioChunks: [] as any[],
     user: {
       name: 'Aymeric',
     },
+    isRecording: false,
   },
   mutations: {
-    // TODO : replace context type
-    setMediaRecorder(state) {
-      navigator.mediaDevices.getUserMedia({ audio: true }).then((stream) => {
-        state.mediaRecorder = new MediaRecorder(stream);
-      });
+    setMediaRecorder(state, payload) {
+      state.mediaRecorder = payload.mediaRecorder;
     },
     // start the recording of the voice
     startRecord(state) {
@@ -31,6 +34,8 @@ export default new Vuex.Store({
         state.mediaRecorder.addEventListener('dataavailable', (event: any) => {
           state.audioChunks.push(event.data);
         });
+
+        state.isRecording = true;
       }
     },
     stopRecord(state) {
@@ -39,18 +44,27 @@ export default new Vuex.Store({
         const audioBlob = new Blob(state.audioChunks);
         const audioUrl = URL.createObjectURL(audioBlob);
         const audio = new Audio(audioUrl);
-
-        alert(typeof(audio));
+        console.log(audio);
       });
+      state.isRecording = false;
     },
   },
   actions: {
-    // TODO : replace context type
     loadMediaRecorder(context) {
-        context.commit('setMediaRecorder');
+      console.log('suce');
+      return new Promise((resolve, reject) => {
+        navigator.mediaDevices.getUserMedia({ audio: true }).then((stream) => {
+          const mediaRecorder = new MediaRecorder(stream);
+          context.commit('setMediaRecorder', {mediaRecorder});
+          resolve();
+        }).catch((err) => console.log(err));
+      });
     },
-    startRecoding(context) {
-      context.commit('record');
+    startRecording(context) {
+      context.commit('startRecord');
+    },
+    stopRecording(context) {
+      context.commit('stopRecord');
     },
   },
 });
