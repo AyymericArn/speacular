@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>Hello {{ $store.state.user.name }}, how are you today ?</h1>
+        <h1>Hello {{ $store.state.recorder.user.name }}, how are you today ?</h1>
         <div class="waves">
             <button @click="record()" class="mic">
                 microphone
@@ -14,13 +14,12 @@ import Vue from 'vue';
 export default Vue.extend({
     methods: {
         record() {
-            !this.$store.state.isRecording ? this.$store.dispatch('startRecording') : this.$store.dispatch('stopRecording');
-            console.log(this.$store.state.isRecording);
+            !this.$store.state.recorder.isRecording ? this.$store.dispatch('recorder/startRecording') : this.$store.dispatch('recorder/stopRecording');
             alert('record');
         },
     },
     mounted() {
-        this.$store.dispatch('loadMediaRecorder').then(() => console.log(this.$store.state.mediaRecorder));
+        this.$store.dispatch('recorder/loadMediaRecorder').then(() => console.log(this.$store.state.recorder.mediaRecorder));
     },
 });
 </script>
