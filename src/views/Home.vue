@@ -2,7 +2,6 @@
   <div class="home">
     <tutorial v-if="!$store.state.recorder.user"/>
     <voice-computer v-else />
-    <router-link :to="{name:'analytics'}">v</router-link>
   </div>
 </template>
 
@@ -23,3 +22,13 @@ export default Vue.extend({
   },
 });
 </script>
+
+<style lang="stylus" scoped>
+
+.home
+  height 100vh
+  display flex
+  flex-direction column
+  justify-content space-around
+
+</style>

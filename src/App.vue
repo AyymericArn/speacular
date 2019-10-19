@@ -11,9 +11,16 @@
 </template>
 
 <style lang="stylus">
+@import url('https://fonts.googleapis.com/css?family=Volkhov&display=swap');
+#nav
+  position fixed
+
 .swipe-enter-active, .swipe-leave-active
   transition all .2s ease
 
 .swipe-enter, .swipe-leave-to /* .fade-leave-active below version 2.1.8 */
   opacity 0
+
+.prev-section, .next-section
+  text-align center
 </style>

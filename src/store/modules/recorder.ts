@@ -31,7 +31,9 @@ const recorderModule: Module<any, any> = {
     },
     stopRecord(state) {
         state.mediaRecorder.stop().then(({blob, buffer}) => {
-        state.audioBlob = blob;
+            state.audioBlob = blob;
+            state.isRecording = false;
+            console.log('stopped recording');
         });
     },
     },
@@ -48,10 +50,10 @@ const recorderModule: Module<any, any> = {
             recorder.init(stream);
 
             context.commit('setMediaRecorder', { mediaRecorder: recorder, stream });
-            resolve();
+                resolve();
             })
             .catch((err) => {
-            alert('No mic detected');
+                alert('No mic detected');
             });
         });
     },
@@ -61,7 +63,8 @@ const recorderModule: Module<any, any> = {
     stopRecording(context) {
         context.commit('stopRecord');
         setTimeout(() => {
-        context.dispatch('sendAudioToAPI');
+            console.log(context.state.audioBlob);
+            context.dispatch('sendAudioToAPI');
         }, 300);
     },
     async sendAudioToAPI(context) {
@@ -73,11 +76,12 @@ const recorderModule: Module<any, any> = {
             'Content-Type': 'audio/wav',
         },
         }).then((response) => {
-        // handle success
-        console.log(response);
+            context.dispatch('registerMood', { mood: response.data }, {root: true} );
+            // handle success
+            console.log(response);
         }).catch((response) => {
-        // handle error
-        console.log(response);
+            // handle error
+            console.log(response);
         });
     },
   },
