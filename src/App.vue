@@ -1,8 +1,9 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+      <router-link class="about" to="/about">
+        <eva-icon name="question-mark-circle" animation="flip" fill="dimgrey"></eva-icon>
+      </router-link>
     </div>
     <transition name="swipe" mode="out-in">
       <router-view/>
@@ -14,6 +15,8 @@
 @import url('https://fonts.googleapis.com/css?family=Volkhov&display=swap');
 #nav
   position fixed
+  top 15px
+  right 15px
 
 .swipe-enter-active, .swipe-leave-active
   transition all .2s ease

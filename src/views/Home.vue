@@ -1,7 +1,9 @@
 <template>
   <div class="home">
-    <tutorial v-if="!$store.state.recorder.user"/>
-    <voice-computer v-else />
+    <transition name="fade" mode="out-in">
+      <tutorial v-if="!$store.state.user"/>
+      <voice-computer v-else />
+    </transition>
   </div>
 </template>
 
@@ -30,5 +32,11 @@ export default Vue.extend({
   display flex
   flex-direction column
   justify-content space-around
+
+.fade-enter-active, .fade-leave-active
+  transition all .2s ease
+
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */
+  opacity 0
 
 </style>

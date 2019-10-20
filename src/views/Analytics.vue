@@ -17,7 +17,6 @@ export default Vue.extend({
         Dashboard
     },
     mounted() {
-        console.log(this.$store);
         console.log(this.$store.getters['analytics/computeMoods']);
     },
 });

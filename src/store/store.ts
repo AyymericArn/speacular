@@ -12,10 +12,14 @@ Vue.use(Vuex);
 //   return new MediaRecorder(stream);
 // };
 
-function getFromLocalStorage(): object[] {
-  const history: string | null = localStorage.getItem('mood-history');
-
+function getDataFromLocalStorage(key: string): object[] {
+  const history: string | null = localStorage.getItem(key);
   return history ? JSON.parse(history) : [];
+}
+
+function getUserFromLocalStorage(): object | null {
+  const user: string | null = localStorage.getItem('user');
+  return user ? JSON.parse(user) : null;
 }
 
 export default new Vuex.Store({
@@ -24,7 +28,25 @@ export default new Vuex.Store({
     analytics,
   },
   state: {
-    moods: getFromLocalStorage(),
+    moods: getDataFromLocalStorage('mood-history'),
+    user: getUserFromLocalStorage(),
+    readQuotes: getDataFromLocalStorage('quotes-history'),
+    wavesMounted: false,
+  },
+  mutations: {
+    registerUser(state, payload) {
+      state.user = {name: payload};
+    },
+    wavesMounted(state) {
+      state.wavesMounted = true;
+    },
+    saveQuote(state, payload) {
+      state.readQuotes.push({text: payload, date: new Date()});
+      localStorage.setItem(
+        'quotes-history',
+        JSON.stringify(state.readQuotes),
+      );
+    },
   },
   actions: {
     registerMood(context, payload) {
@@ -34,5 +56,15 @@ export default new Vuex.Store({
         JSON.stringify(context.state.moods),
       );
     },
-  }
+    registerUser(context, payload) {
+      context.commit('registerUser', payload);
+      localStorage.setItem(
+        'user',
+        JSON.stringify(context.state.user),
+      );
+    },
+    wavesMounted(context) {
+      context.commit('wavesMounted');
+    },
+  },
 });

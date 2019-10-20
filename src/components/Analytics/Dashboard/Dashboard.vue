@@ -22,7 +22,7 @@ export default Vue.extend({
         const chart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: ['anger', 'calm', 'energy', 'joy', 'sorrow'],
+                labels: ['calm', 'anger', 'joy', 'sorrow', 'energy'],
                 datasets: [{
                     data: Object.values(this.moodDatas),
                     backgroundColor: 'transparent',

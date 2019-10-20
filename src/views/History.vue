@@ -11,7 +11,9 @@ import Vue from 'vue';
 import Quotes from '@/components/History/Quotes/Quotes.vue';
 
 export default Vue.extend({
-
+    components: {
+        Quotes,
+    },
 });
 </script>
 
