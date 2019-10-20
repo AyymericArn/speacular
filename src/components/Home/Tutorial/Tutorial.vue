@@ -7,7 +7,7 @@
                     <h2>What's your name ?</h2>
                     <form @submit.prevent="registerName" action="">
                         <input v-model="name" type="text" name="" id="">
-                        <input type="submit" value="">
+                        <input type="submit" value="ok">
                     </form>
                 </div>
             </transition>

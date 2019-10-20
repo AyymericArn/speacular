@@ -24,7 +24,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import waveGenerator from './waves';
+// import waveGenerator from './waves';
 import axios from 'axios';
 
 export default Vue.extend({
@@ -56,11 +56,11 @@ export default Vue.extend({
     },
     mounted() {
         this.$store.dispatch('recorder/loadMediaRecorder').then(() => null);
-        this.animation = waveGenerator(
-            this.$refs.waves, 
-            this.$refs.waves.getContext('2d'),
-            this.$store.state.wavesMounted
-        );
+        // this.animation = waveGenerator(
+        //     this.$refs.waves, 
+        //     this.$refs.waves.getContext('2d'),
+        //     this.$store.state.wavesMounted
+        // );
         console.log(this.$store.state.wavesMounted);    
         this.$store.dispatch('wavesMounted');
     },
