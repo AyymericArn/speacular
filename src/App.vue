@@ -13,6 +13,10 @@
 
 <style lang="stylus">
 @import url('https://fonts.googleapis.com/css?family=Volkhov&display=swap');
+
+:root
+  background-color #fcf9e6
+
 #nav
   position fixed
   top 15px

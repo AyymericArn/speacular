@@ -1,6 +1,6 @@
 // https://docs.cypress.io/api/introduction/api.html
 
-describe('My First Test', () => {
+describe('Home screen test', () => {
   it('Visits the home screen', () => {
     cy.visit('/');
     cy.contains('h1', 'Hello,');
@@ -26,7 +26,7 @@ describe('My First Test', () => {
     cy.get('.mic').click();
     cy.get('.test').should('exist');
     cy.get('button').should('exist');
-    cy.request('http://dev.aymericarn.fr/speacular_api');
+    cy.request('http://dev.aymericarn.fr/speacular_api/');
     cy.server();
     cy.route({
       method: 'POST',      // Route all POST requests
@@ -41,5 +41,21 @@ describe('My First Test', () => {
     });
     cy.get('button').click();
   });
+});
+
+describe('Analytics part test', () => {
+  it('should go on the analytics section', () => {
+    cy.get('.next-section').click();
+    cy.get('.analytics').should('exist');
+    cy.get('canvas').should('exist');
+  })
+});
+
+describe('Quotes history part test', () => {
+  it('should go on the quote section', () => {
+    cy.get('.next-section').click();
+    cy.get('.analytics').should('exist');
+    cy.get('canvas').should('exist');
+  })
 });
 
