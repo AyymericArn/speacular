@@ -31,7 +31,6 @@ export default new Vuex.Store({
     moods: getDataFromLocalStorage('mood-history'),
     user: getUserFromLocalStorage(),
     readQuotes: getDataFromLocalStorage('quotes-history'),
-    wavesMounted: false,
   },
   getters: {
     orderedReadQuotes: (state, getters) => {
@@ -41,9 +40,6 @@ export default new Vuex.Store({
   mutations: {
     registerUser(state, payload) {
       state.user = {name: payload};
-    },
-    wavesMounted(state) {
-      state.wavesMounted = true;
     },
     saveQuote(state, payload) {
       state.readQuotes.push({text: payload, date: new Date()});
@@ -67,9 +63,6 @@ export default new Vuex.Store({
         'user',
         JSON.stringify(context.state.user),
       );
-    },
-    wavesMounted(context) {
-      context.commit('wavesMounted');
     },
   },
 });

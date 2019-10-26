@@ -8,9 +8,8 @@ let waves = []
 let waveHeight = 50
 let waveColors = ["#6BB9F0","#19B5FE","#60B6FF", "#89C4F4"]
 
-const waveHeader = ($canvas, context, wavesMounted) =>
+const waveHeader = ($canvas, context) =>
 {
-    console.log('w  v', wavesMounted);
     resizeWaveCanvas($canvas)
     window.addEventListener('resize', () => resizeWaveCanvas($canvas))
     window.addEventListener('orientationchange', () => resizeWaveCanvas($canvas))
@@ -20,9 +19,9 @@ const waveHeader = ($canvas, context, wavesMounted) =>
         const temp = new waveGenerator(waveColors[i], 1, nodes, $canvas)
     }
     
-    return update($canvas, context, !wavesMounted)
+    return update($canvas, context)
 }
-const update = ($canvas, context, requestAF) =>
+const update = ($canvas, context) =>
 {
     context.globalCompositeOperation = 'source-over'
     context.fillRect(0,0,$canvas.width,$canvas.height)
@@ -41,9 +40,11 @@ const update = ($canvas, context, requestAF) =>
     }
     context.fillStyle = '#FFFFFF'
 
-    return window.requestAnimationFrame(() => {
+    window.animation = window.requestAnimationFrame(() => {
         update($canvas, context)
-    })
+    });
+
+
 }
 class waveGenerator
 {

@@ -63,18 +63,15 @@ export default Vue.extend({
     },
     mounted() {
         this.$store.dispatch('recorder/loadMediaRecorder').then(() => null);
-        this.animation = waveGenerator(
+
+        waveGenerator(
             this.$refs.waves, 
-            this.$refs.waves.getContext('2d'),
-            this.$store.state.wavesMounted
+            this.$refs.waves.getContext('2d')
         );
-        console.log(this.$store.state.wavesMounted);    
-        this.$store.dispatch('wavesMounted');
     },
-    // TODO : fix bug
-    // beforeDestroy() {
-    //     window.cancelAnimationFrame(this.animation)
-    // }
+    beforeDestroy() {
+        window.cancelAnimationFrame((window as any).animation)
+    }
 });
 </script>
 
