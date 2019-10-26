@@ -33,6 +33,11 @@ export default new Vuex.Store({
     readQuotes: getDataFromLocalStorage('quotes-history'),
     wavesMounted: false,
   },
+  getters: {
+    orderedReadQuotes: (state, getters) => {
+      return state.readQuotes.reverse();
+    },
+  },
   mutations: {
     registerUser(state, payload) {
       state.user = {name: payload};

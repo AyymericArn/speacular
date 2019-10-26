@@ -5,8 +5,16 @@ import recorder from './recorder';
 const mutations = recorder.mutations as MutationTree<any>;
 let state: any;
 
-describe('todos', () => {
-    it('should be ok', () => {
-        expect(1).toBe(1);
+describe('recorder store module', () => {
+    it('should return mood result', () => {
+        state = {};
+        mutations.computeResult(state, {
+            anger: 2,
+            calm: 28,
+            energy: 8,
+            joy: 12,
+            sorrow: 6,
+        });
+        expect(state.result).toBe(1);
     });
 });

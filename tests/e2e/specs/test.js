@@ -26,17 +26,17 @@ describe('My First Test', () => {
     cy.get('.mic').click();
     cy.get('.test').should('exist');
     cy.get('button').should('exist');
-    cy.request('http://localhost:3000/');
+    cy.request('http://dev.aymericarn.fr/speacular_api');
     cy.server();
     cy.route({
-      method: 'POST',      // Route all GET requests
-      url: /audio/,    // that have a URL that matches '/users/*'
+      method: 'POST',      // Route all POST requests
+      url: /audio/,    // that have a URL that matches '/audio/*'
       response: {
         anger: 2,
         calm: 28,
         energy: 8,
         joy: 12,
-        sorrow: 6
+        sorrow: 6,
       }       // and force the response to be: []
     });
     cy.get('button').click();

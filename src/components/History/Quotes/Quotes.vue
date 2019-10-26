@@ -12,7 +12,7 @@ import Vue from 'vue'
 export default Vue.extend({
     data() {
         return {
-            quotes: this.$store.state.readQuotes,
+            quotes: this.$store.getters.orderedReadQuotes,
         }
     },
 })
@@ -25,6 +25,7 @@ export default Vue.extend({
 .quotes
     height 70vh
     margin 0 20px
+    overflow-y scroll
 
     .quote
         margin 20px 0

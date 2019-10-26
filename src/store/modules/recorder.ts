@@ -29,6 +29,7 @@ const recorderModule: Module<any, any> = {
         audioWav: null,
         isRecording: false,
         wav: null,
+        isLoading: false,
         // here goes the daily recommandation
         result: getResultFromLocalStorage(),
     },
@@ -59,6 +60,9 @@ const recorderModule: Module<any, any> = {
                 }
             }
             state.result = resultMapping[dominant];
+        },
+        toggleLoad(state) {
+            state.isLoading = !state.isLoading;
         },
     },
     actions: {
@@ -93,26 +97,34 @@ const recorderModule: Module<any, any> = {
             }, 300);
         },
         async sendAudioToAPI(context) {
+            context.commit('toggleLoad');
             axios({
             method: 'post',
-            url: 'http://localhost:3000/audio',
+            url: 'https://dev.aymericarn.fr/speacular_api/audio',
             data: context.state.audioBlob,
             headers: {
                 'Content-Type': 'audio/wav',
             },
             }).then((response) => {
+                // saves the moods of the day in mood history
                 context.dispatch('registerMood', { mood: response.data }, {root: true} );
+                // returns the mood to determine which phrase should be displayed
                 context.commit('computeResult', { mood: response.data });
                 localStorage.setItem(
                     'result',
                     JSON.stringify({ content: context.state.result, date: new Date().toDateString() })
                 );
+                context.commit('toggleLoad');
                 // handle success
                 console.log(response);
             }).catch((response) => {
                 // handle error
+                context.commit('toggleLoad');
                 console.log(response);
             });
+        },
+        toggleLoad(context) {
+            context.commit('toggleLoad');
         },
     },
 };
