@@ -13,7 +13,11 @@ npm run serve
 ```
 ## Use Speacular
 
-To test the project, be sure to have a voice recording device plugged to your machine (a basic webcam mic should do it, as well as the default mic of your phone). If you're too lazy to setup a local server and to connect your phone to it in order to use its microphone, just visit [dev.aymericarn.fr/speacular](dev.aymericarn.fr/speacular) on your device. Be sure to be online !
+### Important
+
+Due to some audio encoding differences between browsers, the recorder function may not work as expected everywhere. It is fully functionnal on localhost, Firefox 70, Windows 10 ; you may face an empty recording bug on Chrome. Not tested on linux and mobile for the moment. The bug will be transparent anyway.
+
+To test the project, be sure to have a voice recording device plugged to your machine (a basic webcam mic should do it, as well as the default mic of your phone). Be sure to be online !
 
 * Provide your name so that Speacular can say Hello to you.
 * Press the Recorder button. If you're not offline, an inspirationnal quote will appear.
