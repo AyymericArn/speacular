@@ -15,7 +15,7 @@ npm run serve
 
 ### Important
 
-Due to some audio encoding differences between browsers, the recorder function may not work as expected everywhere. It is fully functionnal on localhost, Firefox 70, Windows 10 ; you may face an empty recording bug on Chrome. Not tested on linux and mobile for the moment. The bug will be transparent anyway.
+Due to some audio encoding differences between browsers, the recorder function may not work as expected everywhere. It is fully functionnal on localhost, Firefox 70, Windows 10 ; you may face an empty recording bug on Chrome. Not tested on linux and mobile for the moment. The bug will be transparent anyway. The experience is optimal on a phone-like responsive size.
 
 To test the project, be sure to have a voice recording device plugged to your machine (a basic webcam mic should do it, as well as the default mic of your phone). Be sure to be online !
 

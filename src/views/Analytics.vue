@@ -14,7 +14,7 @@ import Dashboard from '@/components/Analytics/Dashboard/Dashboard.vue';
 
 export default Vue.extend({
     components: {
-        Dashboard
+        Dashboard,
     },
     mounted() {
         console.log(this.$store.getters['analytics/computeMoods']);

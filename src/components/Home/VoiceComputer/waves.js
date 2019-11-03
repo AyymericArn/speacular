@@ -38,7 +38,7 @@ const update = ($canvas, context) =>
         }
         drawWave(waves[i], $canvas, context)
     }
-    context.fillStyle = '#FFFFFF'
+    context.fillStyle = '#fcf9e6'
 
     window.animation = window.requestAnimationFrame(() => {
         update($canvas, context)

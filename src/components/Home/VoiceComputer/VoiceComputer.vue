@@ -37,8 +37,8 @@ export default Vue.extend({
         return {
             animation: null,
             isTesting: false,
-            testContent: ''
-        }
+            testContent: '',
+        };
     },
     methods: {
         startRecord() {
@@ -49,9 +49,9 @@ export default Vue.extend({
             this.$store.dispatch('recorder/toggleLoad');
             axios.get('http://quotes.rest/qod?category=inspire', {
                 headers: {
-                    'Accept':'application/json',
+                    Accept: 'application/json',
                 },
-            }).then(res => {
+            }).then((res) => {
                 this.$store.dispatch('recorder/toggleLoad');
                 this.testContent = res.data.contents.quotes[0].quote;
                 this.isTesting = true;
@@ -65,13 +65,13 @@ export default Vue.extend({
         this.$store.dispatch('recorder/loadMediaRecorder').then(() => null);
 
         waveGenerator(
-            this.$refs.waves, 
-            this.$refs.waves.getContext('2d')
+            this.$refs.waves,
+            this.$refs.waves.getContext('2d'),
         );
     },
     beforeDestroy() {
-        window.cancelAnimationFrame((window as any).animation)
-    }
+        window.cancelAnimationFrame((window as any).animation);
+    },
 });
 </script>
 
@@ -120,9 +120,9 @@ export default Vue.extend({
 
         button
             border-radius 150px
-            padding 15px 16px
+            padding 16px 18px
             border #619df1 2px solid
-            background white
+            background #fcf9e6
 
     canvas
         position: absolute;

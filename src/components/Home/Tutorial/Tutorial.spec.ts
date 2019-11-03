@@ -36,5 +36,5 @@ describe('Tutorial', () => {
         const spy = spyOn($store, 'dispatch');
         wrapper.find('button').trigger('click');
         expect(spy).toHaveBeenCalledWith('registerUser', 'John');
-    })
+    });
 });

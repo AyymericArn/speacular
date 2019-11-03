@@ -30,13 +30,13 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import Vue from 'vue';
 export default Vue.extend({
     data() {
         return {
             name: '',
-            step: 0
-        }
+            step: 0,
+        };
     },
     methods: {
         registerName() {
@@ -45,15 +45,21 @@ export default Vue.extend({
         },
         go() {
             this.$store.dispatch('registerUser', this.name);
-        }
-    }
-})
+        },
+    },
+});
 </script>
 
 <style scoped lang="stylus">
 
 .tutorial
+    font-family: Volkhov;
+    line-height: 2.8rem;
+    padding: 40px;
+    font-size: 1.4rem;
+
     ol
+        font-size: 1.2rem;
         list-style decimal
 
 .fade-enter-active, .fade-leave-active

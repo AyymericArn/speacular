@@ -4,7 +4,6 @@ const analyticsModule: Module<any, any> = {
     namespaced: true,
     getters: {
         computeMoods(state, getters, rootState) {
-            // console.log(rootState.moods)
             if (rootState.moods.length > 0) {
                 const synthese = rootState.moods.reduce((accumulator, value) => {
                     // spread to get the correct value without Vue stuff

@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import Vue from 'vue';
 import Chart from 'chart.js';
 
 export default Vue.extend({
@@ -32,10 +32,10 @@ export default Vue.extend({
                         'rgba(255, 206, 86, 1)',
                         'rgba(75, 192, 192, 1)',
                         'rgba(153, 102, 255, 1)',
-                        'rgba(255, 159, 64, 1)'
+                        'rgba(255, 159, 64, 1)',
                     ],
                     borderWidth: 1,
-                    lineTension: 0
+                    lineTension: 0,
                 }],
             },
             options: {
@@ -46,7 +46,7 @@ export default Vue.extend({
                 scales: {
                     yAxes: [{
                         ticks: {
-                            beginAtZero: true
+                            beginAtZero: true,
                         },
                     }],
                 },
@@ -56,10 +56,13 @@ export default Vue.extend({
         // this.$refs.infos.width = 400;
         // this.$refs.infos.height = 400;
         chart.render();
-    }
-})
+    },
+});
 </script>
 
 <style lang="stylus">
+
+canvas
+    max-height 800px
 
 </style>

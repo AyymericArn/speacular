@@ -41,7 +41,6 @@ const recorderModule: Module<any, any> = {
         // start the recording of the voice
         startRecord(state) {
             if (state.mediaRecorder !== null) {
-                console.log('started !');
                 state.mediaRecorder.start().then(() => state.isRecording = true);
             }
         },
@@ -49,7 +48,6 @@ const recorderModule: Module<any, any> = {
             state.mediaRecorder.stop().then(({blob, buffer}) => {
                 state.audioBlob = blob;
                 state.isRecording = false;
-                console.log('stopped recording');
             });
         },
         computeResult(state, payload) {
@@ -92,7 +90,6 @@ const recorderModule: Module<any, any> = {
             context.commit('stopRecord');
             context.commit('saveQuote', payload, {root: true});
             setTimeout(() => {
-                console.log(context.state.audioBlob);
                 context.dispatch('sendAudioToAPI');
             }, 300);
         },
@@ -112,15 +109,13 @@ const recorderModule: Module<any, any> = {
                 context.commit('computeResult', { mood: response.data });
                 localStorage.setItem(
                     'result',
-                    JSON.stringify({ content: context.state.result, date: new Date().toDateString() })
+                    JSON.stringify({ content: context.state.result, date: new Date().toDateString() }),
                 );
                 context.commit('toggleLoad');
                 // handle success
-                console.log(response);
             }).catch((response) => {
                 // handle error
                 context.commit('toggleLoad');
-                console.log(response);
             });
         },
         toggleLoad(context) {
