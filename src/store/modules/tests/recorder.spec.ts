@@ -1,31 +1,10 @@
 import { MutationTree } from 'vuex';
 import './mocks/index';
 import recorder from '../recorder';
+import RecorderState from '@/models/IRecorderStore'
 
-const mutations = recorder.mutations as MutationTree<{
-    stream: null,
-    mediaRecorder: any,
-    audioContext: AudioContext,
-    audioChunks: any[],
-    audioBlob: Blob,
-    audioWav: null,
-    isRecording: boolean,
-    wav: null,
-    isLoading: boolean,
-    result: object | string,
-}>;
-let state: {
-    stream: null,
-    mediaRecorder: any,
-    audioContext: AudioContext,
-    audioChunks: any[],
-    audioBlob: Blob,
-    audioWav: null,
-    isRecording: boolean,
-    wav: null,
-    isLoading: boolean,
-    result: object | string,
-};
+const mutations = recorder.mutations as MutationTree<RecorderState>;
+let state: RecorderState;
 
 describe('recorder store module', () => {
     it('should return mood result', () => {
@@ -36,9 +15,7 @@ describe('recorder store module', () => {
             audioContext: new (window.AudioContext)(),
             audioChunks: [] as any[],
             audioBlob: null as Blob,
-            audioWav: null,
             isRecording: false,
-            wav: null,
             isLoading: false,
             // here goes the daily recommandation
             result: '',

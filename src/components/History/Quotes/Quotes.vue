@@ -9,8 +9,9 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import Quote from '../../../models/IQuote';
 export default Vue.extend({
-    data() {
+    data(): {quotes: Quote[] } {
         return {
             quotes: this.$store.getters.orderedReadQuotes,
         };

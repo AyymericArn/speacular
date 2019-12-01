@@ -7,7 +7,7 @@ import Vue from 'vue';
 import Chart from 'chart.js';
 
 export default Vue.extend({
-    data() {
+    data(): { ctx: CanvasRenderingContext2D } {
         return {
             ctx: null as CanvasRenderingContext2D,
         };
@@ -18,8 +18,8 @@ export default Vue.extend({
         },
     },
     mounted() {
-        const ctx = this.$refs.infos.getContext('2d');
-        const chart = new Chart(ctx, {
+        const ctx: CanvasRenderingContext2D = this.$refs.infos.getContext('2d');
+        const chart: Chart = new Chart(ctx, {
             type: 'line',
             data: {
                 labels: ['calm', 'anger', 'joy', 'sorrow', 'energy'],

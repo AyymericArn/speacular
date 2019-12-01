@@ -32,18 +32,18 @@
 <script lang="ts">
 import Vue from 'vue';
 export default Vue.extend({
-    data() {
+    data(): { name: string, step: number } {
         return {
             name: '',
             step: 0,
         };
     },
     methods: {
-        registerName() {
+        registerName(): void {
             // TODO : fix animation
             this.step++;
         },
-        go() {
+        go(): void {
             this.$store.dispatch('registerUser', this.name);
         },
     },

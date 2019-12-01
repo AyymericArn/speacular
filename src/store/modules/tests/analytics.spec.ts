@@ -1,8 +1,9 @@
 import { MutationTree } from 'vuex';
 import analytics from '../analytics';
+import RootState from '@/models/IStore';
 
 const getters = analytics.getters;
-let state: { moods: object[], user?: object | null, readQuotes?: object[] };
+let state: RootState;
 
 describe('analytics store module', () => {
     it('should compute moods', () => {
@@ -18,6 +19,15 @@ describe('analytics store module', () => {
                         energy: 18,
                     },
                 },
+            ],
+            user: {
+                name: 'John',
+            },
+            readQuotes: [
+                {
+                    date: new Date(),
+                    text: 'test',
+                }
             ],
         };
         const result = getters.computeMoods(null, null, state, null);

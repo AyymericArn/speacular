@@ -3,6 +3,9 @@ import Vuex, { Store } from 'vuex';
 import State from '@/models/IStore';
 import recorder from '@/store/modules/recorder.ts';
 import analytics from '@/store/modules/analytics.ts';
+import User from '@/models/IUser';
+import Mood from '@/models/IMood';
+import Quote from '@/models/IQuote';
 // import type {MediaRecorder} from 'dom-mediacapture-record';
 
 Vue.use(Vuex);
@@ -12,12 +15,12 @@ Vue.use(Vuex);
 //   return new MediaRecorder(stream);
 // };
 
-function getDataFromLocalStorage(key: string): object[] {
+function getDataFromLocalStorage(key: string): Mood[] | Quote[] {
   const history: string | null = localStorage.getItem(key);
   return history ? JSON.parse(history) : [];
 }
 
-function getUserFromLocalStorage(): object | null {
+function getUserFromLocalStorage(): User | null {
   const user: string | null = localStorage.getItem('user');
   return user ? JSON.parse(user) : null;
 }
@@ -33,8 +36,8 @@ export default new Vuex.Store({
     readQuotes: getDataFromLocalStorage('quotes-history'),
   },
   getters: {
-    orderedReadQuotes: (state, getters) => {
-      return state.readQuotes.reverse();
+    orderedReadQuotes: (state, getters): Quote[] => {
+      return (state.readQuotes as Quote[]).reverse();
     },
   },
   mutations: {
@@ -42,7 +45,7 @@ export default new Vuex.Store({
       state.user = {name: payload};
     },
     saveQuote(state, payload) {
-      state.readQuotes.push({text: payload, date: new Date()});
+      (state.readQuotes as Quote[]).push({text: payload, date: new Date()});
       localStorage.setItem(
         'quotes-history',
         JSON.stringify(state.readQuotes),
@@ -51,7 +54,7 @@ export default new Vuex.Store({
   },
   actions: {
     registerMood(context, payload) {
-      context.state.moods.push({mood: payload.mood, date: new Date()});
+      (context.state.moods as Mood[]).push({mood: payload.mood, date: new Date()});
       localStorage.setItem(
         'mood-history',
         JSON.stringify(context.state.moods),

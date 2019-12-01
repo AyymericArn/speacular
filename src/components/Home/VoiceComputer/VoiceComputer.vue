@@ -29,23 +29,32 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import waveGenerator from './waves';
 import axios from 'axios';
 
+let waveGenerator
+if (process.env.NODE_ENV !== 'test') {
+    waveGenerator = require('./waves')
+};
+
+declare global {
+    interface Window {
+        animation: number
+    }
+}
+
 export default Vue.extend({
-    data() {
+    data(): { isTesting: boolean, testContent: string } {
         return {
-            animation: null,
             isTesting: false,
             testContent: '',
         };
     },
     methods: {
-        startRecord() {
+        startRecord(): void {
             this.$store.dispatch('recorder/startRecording');
             this.loadQuote();
         },
-        loadQuote() {
+        loadQuote(): void {
             this.$store.dispatch('recorder/toggleLoad');
             axios.get('http://quotes.rest/qod?category=inspire', {
                 headers: {
@@ -57,20 +66,22 @@ export default Vue.extend({
                 this.isTesting = true;
             });
         },
-        evaluate() {
+        evaluate(): void {
             this.$store.dispatch('recorder/stopRecording', this.testContent);
         },
     },
     mounted() {
         this.$store.dispatch('recorder/loadMediaRecorder').then(() => null);
 
-        waveGenerator(
-            this.$refs.waves,
-            this.$refs.waves.getContext('2d'),
-        );
+        if (process.env.NODE_ENV !== 'test') {
+            waveGenerator(
+                this.$refs.waves,
+                this.$refs.waves.getContext('2d'),
+            );
+        }
     },
     beforeDestroy() {
-        window.cancelAnimationFrame((window as any).animation);
+        window.cancelAnimationFrame(window.animation);
     },
 });
 </script>

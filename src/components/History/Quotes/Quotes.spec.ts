@@ -10,10 +10,19 @@ const $store = new Vuex.Store({
     state: {
         readQuotes: [
             {
-                date: '2019-10-20T13:58:48.498Z',
+                date: new Date(),
                 text: 'I lik pizzas',
             },
         ],
+        user: {
+            name: 'John',
+        },
+        moods: [
+            {
+                date: new Date(),
+                mood: {anger: 0},
+            },
+        ]
     },
 });
 
@@ -21,7 +30,7 @@ const wrapper = shallowMount(Quotes, { mocks: { $store }, stubs: ['eva-icon', 'r
 
 describe('Quotes', () => {
     it('should render quotes', () => {
-        expect(wrapper.contains('.quote')).toBe(true);
         expect(wrapper.find('.date')).toBeTruthy();
+        expect(wrapper.contains('.quotes')).toBe(true);
     });
 });

@@ -2,6 +2,10 @@ import { Module } from 'vuex';
 import axios from 'axios';
 import Recorder from 'recorder-js';
 
+import State from '@/models/IRecorderStore';
+import RootState from '@/models/IStore';
+import Mood from '@/models/IMood';
+
 import resultMapping from '@/store/modules/recorderResults.json';
 
 function getResultFromLocalStorage(): object | string {
@@ -17,7 +21,7 @@ function getResultFromLocalStorage(): object | string {
     return '';
 }
 
-const recorderModule: Module<any, any> = {
+const recorderModule: Module<State, RootState> = {
     namespaced: true,
     state: {
         // // mocking the MediaRecorder to please TS
@@ -26,15 +30,13 @@ const recorderModule: Module<any, any> = {
         audioContext: new (window.AudioContext)(),
         audioChunks: [] as any[],
         audioBlob: null as Blob,
-        audioWav: null,
         isRecording: false,
-        wav: null,
         isLoading: false,
         // here goes the daily recommandation
         result: getResultFromLocalStorage(),
     },
     mutations: {
-        setMediaRecorder(state, payload) {
+        setMediaRecorder(state, payload: {stream: MediaStream, mediaRecorder: Recorder}) {
             state.stream = payload.stream;
             state.mediaRecorder = payload.mediaRecorder;
         },
@@ -50,7 +52,7 @@ const recorderModule: Module<any, any> = {
                 state.isRecording = false;
             });
         },
-        computeResult(state, payload) {
+        computeResult(state, payload: {mood: Mood[]}) {
             let dominant = 'anger';
             for (const mood in payload.mood) {
                 if (payload.mood.hasOwnProperty(mood)) {
@@ -86,7 +88,7 @@ const recorderModule: Module<any, any> = {
         startRecording(context) {
             context.commit('startRecord');
         },
-        stopRecording(context, payload) {
+        stopRecording(context, payload: string) {
             context.commit('stopRecord');
             context.commit('saveQuote', payload, {root: true});
             setTimeout(() => {

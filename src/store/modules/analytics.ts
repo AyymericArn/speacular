@@ -1,11 +1,14 @@
 import { Module } from 'vuex';
+import RootState from '@/models/IStore';
+import Mood from '@/models/IMood';
 
-const analyticsModule: Module<any, any> = {
+// TODO: replace object with good types
+const analyticsModule: Module<{}, RootState> = {
     namespaced: true,
     getters: {
-        computeMoods(state, getters, rootState) {
+        computeMoods(state: {} | null, getters: null, rootState ) {
             if (rootState.moods.length > 0) {
-                const synthese = rootState.moods.reduce((accumulator, value) => {
+                const synthese: Mood = rootState.moods.reduce((accumulator, value) => {
                     // spread to get the correct value without Vue stuff
                     for (const mood in {...value.mood}) {
                         if (value.mood.hasOwnProperty(mood)) {
@@ -14,7 +17,7 @@ const analyticsModule: Module<any, any> = {
                     }
                     return accumulator;
                 });
-                const result = {...synthese.mood};
+                const result: Mood["mood"] = {...synthese.mood};
                 delete result.error;
                 return result;
             } else {
